@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ANSI_COLOR_RESET   "\x1b[0m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+
+int main() {
+    int numberToGuess, userGuess, attempts = 0;
+    
+    // Seed the random number generator
+    srand(time(NULL));
+    
+    // Generate a random number between 1 and 100
+    numberToGuess = rand() % 100 + 1;
+    
+    printf(ANSI_COLOR_CYAN "Welcome to the Number Guessing Game!\n" ANSI_COLOR_RESET);
+    
+    do {
+        printf(ANSI_COLOR_MAGENTA "Enter your guess (between 1 and 100): " ANSI_COLOR_RESET);
+        scanf("%d", &userGuess);
+        
+        attempts++;
+        
+        if (userGuess < numberToGuess) {
+            printf(ANSI_COLOR_YELLOW "Higher! Try again.\n" ANSI_COLOR_RESET);
+        } else if (userGuess > numberToGuess) {
+            printf(ANSI_COLOR_YELLOW "Lower! Try again.\n" ANSI_COLOR_RESET);
+        } else {
+            printf(ANSI_COLOR_CYAN "Congratulations! You guessed the number %d in %d attempts.\n" ANSI_COLOR_RESET, numberToGuess, attempts);
+        }
+    } while (userGuess != numberToGuess);
+    
+    return 0;
+}
